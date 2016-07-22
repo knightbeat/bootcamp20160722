@@ -1,0 +1,11 @@
+FROM lwieske/java-8
+
+RUN mkdir wso2
+
+RUN cd wso2
+
+COPY mss-source/Transportation-option-service/target/Transportation-option-service-1.0.0-SNAPSHOT.jar wso2/
+
+CMD ["java", "-jar", "/wso2/Transportation-option-service-1.0.0-SNAPSHOT.jar"]
+
+EXPOSE 8080

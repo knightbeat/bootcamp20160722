@@ -1,0 +1,65 @@
+version: '2'
+services:
+  dbs:
+    container_name: dbs.bootcamp.com
+    build: 
+        context: .
+        dockerfile: dbs/Dockerfile
+    ports:
+     - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+  dss:
+    container_name: dss.bootcamp.com
+    depends_on: 
+      - dbs
+    build: 
+        context: .
+        dockerfile: dss/Dockerfile
+    ports:
+     - "9765:9763"
+     - "9445:9443"
+  esb:
+    container_name: esb.bootcamp.com
+    build:
+      context: .
+      dockerfile: esb/Dockerfile
+    ports:
+      - "9764:9763"
+      - "9444:9443"
+      - "8281:8280"
+      - "8244:8243"
+  apim:
+    container_name: api.bootcamp.com
+    build:
+      context: .
+      dockerfile: apim/Dockerfile
+    ports:
+      - "9763:9763"
+      - "9443:9443"
+      - "8280:8280"
+      - "8243:8243"
+  das:
+    container_name: das.bootcamp.com
+    depends_on: 
+      - dbs
+    build:
+      context: .
+      dockerfile: das/Dockerfile
+    ports:
+      - "9767:9763"
+      - "9447:9443"
+  trans-cost:
+    container_name: tcs.bootcamp.com
+    build:
+      context: .
+      dockerfile: trans-cost/Dockerfile
+    ports:
+      - "8081:8080"
+  trans-opt:
+    container_name: tos.bootcamp.com
+    build:
+      context: .
+      dockerfile: trans-opt/Dockerfile
+    ports:
+      - "8080:8080"
