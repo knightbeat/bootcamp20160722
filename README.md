@@ -36,7 +36,7 @@
 **Microservices**
 
   1. Start a terminal window
-  2. Go to `../bootcamp20160722/mss-source/Transportation-option-service` directory
+  2. Go to `bootcamp20160722/mss-source/Transportation-option-service` directory
   3. Build the microservice with Maven
      - `mvn clean install`
   4. Start the relevant microservice container with Docker Quickstart terminal.
@@ -46,7 +46,9 @@
   6. Try the `transport-options` service with [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
      - http://docker.machine:8080/transport-options/routes?from=KT89HA&to=SW96DE&at=1933
      - http://docker.machine:8080/transport-options/routes/LNDN00012
-  7. Go to `../bootcamp20160722/mss-source/Transportation-costs-service` directory
+     - Add header `Accept` with value `application/json` and see the response.
+     - Add header `Accept` with value `text/xml` and see the response.
+  7. Go to `bootcamp20160722/mss-source/Transportation-costs-service` directory
   8. Build the microservice with Maven
      - `mvn clean install`
   9. Start the relevant microservice container with Docker Quickstart terminal.
@@ -57,7 +59,9 @@
      - http://docker.machine:8081/transport-cost/rail?from=Hampton&to=Vauxhall
      - http://docker.machine:8081/transport-cost/bus?from=Hampton&to=Vauxhall
      - http://docker.machine:8081/transport-cost/taxi?from=Hampton&to=Vauxhall
-  12. List and see tunning containers
+     - Add header `Accept` with value `application/json` and see the response.
+     - Add header `Accept` with value `text/xml` and see the response.
+  12. List and see running containers
     - `docker ps` - lists the running container information. 
      - Observe the NAME values ( dbs.bootcamp.com, tos.bootcamp.com, tcs.bootcamp.com ) of the containers.
   
@@ -69,30 +73,30 @@
      - Observe the NAME values ( dbs.bootcamp.com, tos.bootcamp.com, tcs.bootcamp.com, dss.bootcamp.com ) of the containers.
   2. Upload Artifacts
      - Tail DSS logs, and observe.
-         - Run `docker exec -it dss.dbtoapi.com tailf wso2/wso2dss-3.5.0/repository/logs/wso2carbon.log`
+         - Run `docker exec -it dss.bootcamp.com tailf wso2/wso2dss-3.5.0/repository/logs/wso2carbon.log`
      - Open the admin management console with [https://docker.machine:9445/carbon](https://docker.machine:9445/carbon) (user=admin, password=admin).
      - Go to `Manage > Carbon Applications > Add`.
-     - Upload `artifacts/data-to-api-composite-project_1.0.0.car`.
+     - Upload `bootcamp20160722/artifacts/bootcamp2016072_1.0.0.car`.
      - Observe DSS logs and verify that the artifacts were deployed successfully.
-  3. Open SOAPUI, and load project  `artifacts/data-to-api-soapui-project-soapui-project.xml`.
-  4. Observe operations of the two Data Services.
+  3. Open [SOAPUI](https://www.soapui.org/downloads/soapui.html), and load project  `bootcamp20160722/artifacts/Bootcamp-soapui-project.xml`.
+  4. Observe operations of the Data Service.
      - CourseInformationDataService
-         - Try the operations `getEnrollments`: and `getEnrollmentsBySubject` with `5242GW` as `subjectCode`.
-     - StudentInformationDataService
-         - Try the operations `getStudents`: and `getStudentById` with `02341334` as `studentId`.
+         - Try the operations `getAllJourneyPlans`: and `getJourneyPlan` with 
+           - `N02341334` as **passport** and,
+           - `JNPLN002` as **plan_id**.
          
 **WSO2 Enterprise Service Bus (ESB)**
 
   1. Start the ESB container
      - `docker-compose up -d esb` - will create the ESB container image and boot it up.
      - `docker ps` - lists the running containers information. 
-     - Observe the NAME value ( esb.dbtoapi.com ) of this container.
+     - Observe the NAME value ( esb.bootcamp.com ) of this container.
   2. Upload Artifacts
      - Tail ESB logs, and observe.
-         - Run `docker exec -it esb.dbtoapi.com tailf wso2/wso2esb-4.9.0/repository/logs/wso2carbon.log`
+         - Run `docker exec -it esb.bootcamp.com tailf wso2/wso2esb-4.9.0/repository/logs/wso2carbon.log`
      - Open the admin management console with [https://docker.machine:9444/carbon](https://docker.machine:9444/carbon) (user=admin, password=admin).
      - Go to `Manage > Carbon Applications > Add`.
-     - Upload `artifacts/data-to-api-composite-project_1.0.0.car`.
+     - Upload `bootcamp20160722/artifacts/bootcamp2016072_1.0.0.car`.
      - Observe ESB logs and verify that the artifacts were deployed successfully.
   3. Start a REST client like [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
   3. Add `http://docker.machine:8281/registrations/enrollments/<an existing subject code>`
