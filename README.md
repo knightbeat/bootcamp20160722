@@ -1,13 +1,16 @@
-# data-to-api#
+# Developers' Bootcamp 2016 #
 
 **Demonstration Scenario**
 
-![alt text](https://github.com/knightbeat/data-to-api/blob/master/artifacts/data-to-api-scenario.png "Demostration Scenario")
-
-
 **Environment Setup**
-	
-  1. Add a host entry to the host machine
+  1. To run the examples of this workshop, it is neccessary to have the following tools installed on your laptop.
+     - Docker or Docker-machine
+       - LINUX users need to install [Docker](https://www.docker.com/)
+       - Windows and OSx user need to install [Docker-machine](https://docs.docker.com/machine/install-machine/).
+  2. This README assumes that the followers may use Windows or OSx. Therefore,
+     - The example docker commands are mostly provided according to Windows and OSx.
+     - LINUX users can skip commands related to `docker-machine`, which are marked as `dmr`.
+  3. Add a host entry to the host machine (`dmr`)
      - `docker-machine start` - will start the docker machine if you are using `windows` or `OSx`.
      - `docker-machine ip` - will display the IP address of the docker machine.
      - Open the `hosts` file of the host machine, and add an entry as `<ip-address> docker.machine`.
@@ -49,7 +52,7 @@
   9. Start the relevant microservice container with Docker Quickstart terminal.
      - `docker-compose up -d trans-cost`
   10. Load the Swagger definition of the `transport-cost` service.
-     - [http://docker.machine:8080/swagger?path=/transport-cost](http://docker.machine:8080/swagger?path=/transport-cost)
+     - [http://docker.machine:8081/swagger?path=/transport-cost](http://docker.machine:8080/swagger?path=/transport-cost)
   11. Try the `transport-cost` service with [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
      - http://docker.machine:8081/transport-cost/rail?from=Hampton&to=Vauxhall
      - http://docker.machine:8081/transport-cost/bus?from=Hampton&to=Vauxhall
