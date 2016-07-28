@@ -99,29 +99,29 @@
      - Upload `bootcamp20160722/artifacts/bootcamp2016072_1.0.0.car`.
      - Observe ESB logs and verify that the artifacts were deployed successfully.
   3. Start a REST client like [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
-  3. Add `http://docker.machine:8281/registrations/enrollments/<an existing subject code>`
-     - i.e. `http://docker.machine:8281/registrations/enrollments/5242GW`
+  3. Add `http://docker.machine:8281/travel/transport-options?passport=<passport_number>&plan_id=<plan_id>`
+     - i.e. http://docker.machine:8281/travel/transport-options?passport=N02341334&plan_id=JNPLN002
   4. Invoke and observe the response
-  5. Add header `Accept` with value `application/json`
-  6. Invoke and observe the response and ESB logs
-  7. Add header `Accept` with value `application/xml`
-  8. Invoke and observe the response and ESB logs
 
 **WSO2 API Manager (API-M)**
 
   1. Start the API-M container
      - `docker-compose up -d apim` - will create the API-M and WSO2 Data Analytics Server(DAS) container images and boot them up.
      - `docker ps` - lists the running containers information. 
-     - Observe the NAME values ( api.dbtoapi.com, das.dbtoapi.com ) of this container.
+     - Observe the NAME value ( api.bootcamp.com ) of this container.
   2. Open API-M user interfaces (user=admin, password=admin).
      - API-M Admin Console [https://docker.machine:9443/carbon](https://docker.machine:9443/carbon)
      - API-M Publisher [https://docker.machine:9443/publisher](https://docker.machine:9443/publisher)
      - API-M Store [https://docker.machine:9443/store](https://docker.machine:9443/store)
   3. Publish the API which was created on the ESB earlier.
      - Create an API on API-M publisher.
-     - Provide a proper resource path (i.e. `/registrarapi`)
-     - Add resource `/enrollments/{subjectCode}` with GET method.
-     - Provide `http://esb.dbtoapi.com:8280/registrations` as the production URL
+     - Provide a proper resource path (i.e. `/travelapi`)
+     - Add resource `/transport-options` with GET method.
+       - Expand the added resource by clicking on `/travel/transport-options` on the resources section
+       - Add 2 query parameters as,
+         - passport
+         - plan_id
+     - Provide `http://esb.bootcamp.com:8280/travel` as the production URL
          - In this case, communication happens directly between the API-M and ESB docker containers.
          - It does not happen accross the host machine.
          - Therefore, instead of using `docker.machine` as the hostname to contact the ESB,
@@ -131,7 +131,7 @@
   4. Subscribe to the API via the API-M Store.
   5. Try the API with Swagger based API Console on the API-M Store UI.
   6. Or, use a REST client like [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
-     - i.e. `http://docker.machine:8280/registrarapi/1.0.0/enrollments/5242GW`
+     - i.e. http://docker.machine:8280/travelapi/transport-options?passport=N02341334&plan_id=JNPLN002
      
 **Additionally note**
   You can also expose the Data Services endpoints (both SOAP and REST) directly through the API Manager, without making a route through the ESB installation.
