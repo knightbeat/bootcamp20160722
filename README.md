@@ -117,7 +117,7 @@
      - Create an API on API-M publisher.
      - Provide a proper resource path (i.e. `/travelapi`)
      - Add resource `/transport-options` with GET method.
-       - Expand the added resource by clicking on `/travel/transport-options` on the resources section
+       - Expand the added resource by clicking on `/transport-options` on the resources section
        - Add 2 query parameters as,
          - passport
          - plan_id
@@ -134,7 +134,7 @@
      - i.e. http://docker.machine:8280/travelapi/transport-options?passport=N02341334&plan_id=JNPLN002
      
 **Additionally note**
-  You can also expose the Data Services endpoints (both SOAP and REST) directly through the API Manager, without making a route through the ESB installation.
+  You can also expose the Microservices and Data-services endpoints (both SOAP and REST) directly through the API Manager, without making a route through the ESB installation. With Microservices, you can use the **Swagger import** option of WSO2 API Manager, in order to get all the API resources generated automatically, without manually adding them.
 
 **When You are done...**
 
