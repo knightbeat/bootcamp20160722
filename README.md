@@ -21,14 +21,49 @@
 **Demostration Setup Overview**
 
 ![alt text](https://github.com/knightbeat/data-to-api/blob/master/artifacts/data-to-api-topology-and-ports-mapping.png "Container Topology and Ports Mapping")
+
+**MySQL database container**
+
+  1. Start the database container
+     - `docker-compose up -d dbs` - will create the MySQL container image and boot it up.
+     - This will also create all the required data tables
+     - `docker ps` - lists the running container information. 
+     - Observe the NAME values ( dbs.bootcamp.com ) of the containers.
+     
+**Microservices**
+
+  1. Start a terminal window
+  2. Go to `../bootcamp20160722/mss-source/Transportation-option-service` directory
+  3. Build the microservice with Maven
+     - `mvn clean install`
+  4. Start the relevant microservice container with Docker Quickstart terminal.
+     - `docker-compose up -d trans-opt`
+  5. Load the Swagger definition of the `transport-options` service.
+     - [http://docker.machine:8080/swagger?path=/transport-options](http://docker.machine:8080/swagger?path=/transport-options)
+  6. Try the `transport-options` service with [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+     - http://docker.machine:8080/transport-options/routes?from=KT89HA&to=SW96DE&at=1933
+     - http://docker.machine:8080/transport-options/routes/LNDN00012
+  7. Go to `../bootcamp20160722/mss-source/Transportation-costs-service` directory
+  8. Build the microservice with Maven
+     - `mvn clean install`
+  9. Start the relevant microservice container with Docker Quickstart terminal.
+     - `docker-compose up -d trans-cost`
+  10. Load the Swagger definition of the `transport-cost` service.
+     - [http://docker.machine:8080/swagger?path=/transport-cost](http://docker.machine:8080/swagger?path=/transport-cost)
+  11. Try the `transport-cost` service with [POSTMAN](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+     - http://docker.machine:8081/transport-cost/rail?from=Hampton&to=Vauxhall
+     - http://docker.machine:8081/transport-cost/bus?from=Hampton&to=Vauxhall
+     - http://docker.machine:8081/transport-cost/taxi?from=Hampton&to=Vauxhall
+  12. List and see tunning containers
+    - `docker ps` - lists the running container information. 
+     - Observe the NAME values ( dbs.bootcamp.com, tos.bootcamp.com, tcs.bootcamp.com ) of the containers.
   
 **WSO2 Data Services Server (DSS)**
 
   1. Start the DSS container
-     - `docker-compose up -d dbs` - will create the container image and boot it up.
      - `docker-compose up -d dss` - will create the DSS container image and boot it up.
      - `docker ps` - lists the running container information. 
-     - Observe the NAME values ( dss.dbtoapi.com , dbs.dbtoapi.com ) of the containers.
+     - Observe the NAME values ( dbs.bootcamp.com, tos.bootcamp.com, tcs.bootcamp.com, dss.bootcamp.com ) of the containers.
   2. Upload Artifacts
      - Tail DSS logs, and observe.
          - Run `docker exec -it dss.dbtoapi.com tailf wso2/wso2dss-3.5.0/repository/logs/wso2carbon.log`
