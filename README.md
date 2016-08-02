@@ -20,10 +20,6 @@
      - WSO2 Data Services Server 3.5.0 - `wso2dss-3.5.0.zip`
      - WSO2 Enterprise Service Bus 4.9.0 - `wso2esb-4.9.0.zip`
   3. Add these 4 binary packs to the `packs` directory.
-  
-**Demostration Setup Overview**
-
-![alt text](https://github.com/knightbeat/data-to-api/blob/master/artifacts/data-to-api-topology-and-ports-mapping.png "Container Topology and Ports Mapping")
 
 **MySQL database container**
 
